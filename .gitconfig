@@ -1,0 +1,82 @@
+[user]
+  name = pavel.liubinski
+  email = pavel.liubinski@check24.de
+
+[merge]
+  tool = kdiff3
+
+[diff]
+  guitool = kdiff3
+
+[difftool "kdiff3"]
+  path = /usr/bin/kdiff3
+
+[credential]
+  helper = cache --timeout=3600000
+
+[alias]
+  a = add
+  aa = !git add -u && git add . && git status
+  alias = "!sh -c '[ $# = 2 ] && git config --global alias.\"$1\" \"$2\" && exit 0 || echo \"usage: git alias <new alias> <original command>\" >&2 && exit 1' -"
+  aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
+  amend = !git commit --amend --no-edit
+  amendall = !git add -u && git add . && git commit --amend --no-edit
+  b = branch
+  ba = checkout -b
+  ca = commit --amend
+  chan = commit --amend --reset-author --no-edit
+  c = commit -m
+  cp = cherry-pick -xn
+  co = checkout
+  dt = difftool -y
+  editconfig = config --global -e
+  f = fetch -p
+  fp = !git fetch --prune && git pull
+  ffs = flow feature start
+  fff = flow feature finish -F
+  ffr = flow feature rebase
+  fft = flow feature track
+  ffp = flow feature publish
+  frs = flow release start
+  frp = flow release publish
+  frt = flow release track
+  frf = flow release finish -Fmp
+  featurecommits = cherry -v develop
+  featurediff = diff develop..
+  find = "!f() { git log --graph --all --no-merges --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %C(green)%d %Creset' --grep=$1; }; f"
+  finda = "!f() { git log --graph --all --no-merges --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an> %C(green)%d %Creset'  --author=$1; }; f"
+  df = diff --color --color-words --abbrev
+  gs = "!f() { git grep --heading --color -I -n -e $1; }; f"
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  lga = log --oneline --graph --all
+  lge = log --graph --all --format=email
+  last = log -1 HEAD
+  ls1 = log --oneline --stat -1
+  ls = "!f() { n=10; [ -n \"$1\" ] && n=$1; git log --oneline --graph --stat -$n; }; f"
+  l = "!f() { n=10; [ -n \"$1\" ] && n=$1; git log --oneline --graph -$n; }; f"
+  m = merge --no-commit
+  mt = mergetool -y
+  p = pull
+  pp = !git pull && git push
+  pom = push origin master
+  psom = push origin master
+  plom = pull origin master
+  rblh = reset --hard HEAD^
+  rbls = reset --soft HEAD^
+  rb = reset --soft HEAD^
+  ri = rebase -i
+  rin = "!f() { n=2; [ -n \"$1\" ] && n=$1; git rebase -i HEAD~$n; }; f"
+  rn = rebase --continue
+  rq = rebase --abort
+  remotes = remote -v show
+  s = status
+  save = !git aa && git commit -n -m
+  showfiles = diff-tree --no-commit-id --name-only -r
+  tree = log --graph --simplify-by-decoration --pretty=format:'%d' --all
+  unstage = reset head --
+  undo = checkout --
+  undolastcommit = reset --hard HEAD~1
+  undopush = git push -f origin HEAD^:master
+  undoall = reset --hard
+  up = pull
+  whereis = "!f() { git branch -r --contains $1; }; f"
